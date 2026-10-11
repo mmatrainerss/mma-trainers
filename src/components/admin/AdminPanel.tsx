@@ -4,8 +4,6 @@ import {
   Link2,
   Database,
   ArrowLeft,
-  Eye,
-  Radio,
   Bell,
   X,
   FileCheck2,
@@ -113,12 +111,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Supabase & Realtime Sync Active Badge */}
-            <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium">
-              <Radio className="w-3 h-3 animate-pulse" />
-              <span>Supabase Cloud Sync</span>
-            </div>
-
             {/* Global Payment & Agency Defaults Button */}
             <button
               type="button"
@@ -128,15 +120,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             >
               <Settings className="w-3.5 h-3.5 text-amber-400" />
               <span>Agency Defaults</span>
-            </button>
-
-            {/* Preview Client Form Button */}
-            <button
-              onClick={() => onPreviewClientForm()}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider transition-colors border border-white/10 cursor-pointer"
-            >
-              <Eye className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Preview Client Form</span>
             </button>
           </div>
         </div>
