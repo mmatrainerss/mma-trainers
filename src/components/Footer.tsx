@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onBookTrial }) => {
           <div className="md:col-span-4 space-y-4">
             <RaiLogo theme="dark" />
             <p className="text-xs text-neutral-400 max-w-sm leading-relaxed">
-              Modern martial arts classes for kids and adults in Austin, Texas. Practical Brazilian Jiu-Jitsu, Muay Thai, Kickboxing and Mixed Martial Arts.
+              Modern martial arts classes for kids and adults. Practical Brazilian Jiu-Jitsu, Muay Thai, Kickboxing and Mixed Martial Arts.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2">
@@ -126,28 +126,22 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onBookTrial }) => {
             </div>
           </div>
 
-          {/* Location & Contact */}
+          {/* Join / Trial CTA */}
           <div className="md:col-span-4 space-y-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#E63B30] block mb-1 font-semibold">
-              ACADEMY LOCATION
+              TRAIN WITH US
             </span>
-            <p className="text-sm font-semibold text-white">
-              +1 (512) 555-1234
-            </p>
-            <p className="text-xs text-neutral-300">
-              contact@rai-ma.com
-            </p>
-            <p className="text-xs text-neutral-400">
-              000 East 6th Street • Austin, TX 78701 • United States
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              Step on the mats with certified coaches. First-timers and experienced fighters are always welcome.
             </p>
             <div className="pt-2">
               <button
                 type="button"
                 onClick={onBookTrial}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#E63B30] hover:text-white uppercase tracking-wider group cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#E63B30] hover:bg-[#D32F2F] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-lg shadow-[#E63B30]/25"
               >
                 <span>Book a Free Trial Today</span>
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -171,7 +165,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onBookTrial }) => {
                 Admin Portal ⚙️
               </button>
             )}
-            <span>Austin, Texas, USA</span>
           </div>
         </div>
 
