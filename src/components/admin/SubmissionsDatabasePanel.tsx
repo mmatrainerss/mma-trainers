@@ -163,7 +163,7 @@ export const SubmissionsDatabasePanel: React.FC = () => {
       {/* Minimal Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-white/10">
         <h2 className="font-['Oswald'] text-2xl font-bold uppercase text-white tracking-wide">
-          Submissions Database
+          Student Submissions & Records
         </h2>
 
         <div className="flex items-center gap-2">
@@ -560,9 +560,7 @@ export const SubmissionsDatabasePanel: React.FC = () => {
           <div className="relative max-w-3xl max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <div className="absolute -top-12 left-0 right-0 flex items-center justify-between text-xs text-white">
               <span className="font-mono text-neutral-400">
-                {lightboxImage.includes('supabase.co')
-                  ? '☁ Supabase Storage (proofs bucket)'
-                  : '📷 Attached Screenshot'}
+                📷 Payment Receipt
               </span>
               <div className="flex items-center gap-2">
                 <a

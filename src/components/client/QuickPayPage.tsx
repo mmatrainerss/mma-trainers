@@ -178,7 +178,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
       utrLine +
       refLine +
       (proofSubmitted?.screenshotUrl
-        ? `• Payment Screenshot: Uploaded to academy cloud records 📸\n\n`
+        ? `• Payment Screenshot: Uploaded & attached 📸\n\n`
         : `• Payment Screenshot: Attached below 📸\n\n`) +
       `Please verify and confirm my receipt!`;
 
@@ -203,7 +203,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
     }
 
     setSubmittingProof(true);
-    setUploadProgress('Uploading screenshot to Supabase Storage...');
+    setUploadProgress('Uploading payment proof...');
 
     try {
       // 1. Upload to Supabase Storage 'proofs' bucket
@@ -222,7 +222,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
         });
       }
 
-      setUploadProgress('Syncing payment record with academy dashboard...');
+      setUploadProgress('Confirming payment details...');
 
       // 2. Save submission to Supabase database & local cache
       const submission = formStorage.saveSubmission({
@@ -238,7 +238,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
         screenshotUrl: finalUrl || undefined,
         screenshotFileName: screenshotFile.name,
         status: 'pending',
-        adminNotes: `Submitted via Quick Pay Portal. Screenshot uploaded to Supabase Storage 'proofs' bucket.`,
+        adminNotes: 'Submitted via Quick Pay Portal with payment screenshot.',
       });
 
       setProofSubmitted(submission);
@@ -416,7 +416,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
                   </div>
                   {proofSubmitted.screenshotUrl && (
                     <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] text-neutral-400">Storage Proof:</span>
+                      <span className="text-[10px] text-neutral-400">Attached Receipt:</span>
                       <a
                         href={proofSubmitted.screenshotUrl}
                         target="_blank"
@@ -424,7 +424,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
                         className="text-[11px] text-[#E63B30] hover:underline flex items-center gap-1 font-sans"
                       >
                         <ImageIcon className="w-3.5 h-3.5" />
-                        <span>View Uploaded File ↗</span>
+                        <span>View Receipt ↗</span>
                       </a>
                     </div>
                   )}
@@ -477,7 +477,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
                             {screenshotFile ? `${(screenshotFile.size / (1024 * 1024)).toFixed(2)} MB` : ''}
                           </span>
                           <span className="text-[10px] text-emerald-400 font-medium flex items-center gap-1 mt-0.5">
-                            <CheckCircle2 className="w-3 h-3" /> Ready to upload to Cloud
+                            <CheckCircle2 className="w-3 h-3" /> Ready to submit
                           </span>
                         </div>
                       </div>
@@ -577,7 +577,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
                   {submittingProof ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{uploadProgress || 'Uploading to Cloud...'}</span>
+                      <span>{uploadProgress || 'Uploading...'}</span>
                     </>
                   ) : (
                     <>
@@ -614,7 +614,7 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
             <span>•</span>
             <span>256-bit SSL Encrypted</span>
             <span>•</span>
-            <span>Supabase Cloud Storage</span>
+            <span>Instant Verification</span>
           </div>
           <p className="text-[11px] text-neutral-500">
             Assistance or queries? Call or WhatsApp{' '}

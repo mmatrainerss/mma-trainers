@@ -72,7 +72,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
               <Bell className="w-4 h-4 animate-bounce" />
             </div>
             <div className="flex-1">
-              <p className="font-bold text-white text-xs leading-tight">Live Database Update</p>
+              <p className="font-bold text-white text-xs leading-tight">Live Registration Alert</p>
               <p className="text-neutral-300 text-[11px] mt-0.5">{toastNotification}</p>
             </div>
             <button

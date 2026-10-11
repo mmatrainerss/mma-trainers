@@ -61,7 +61,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 onClick={this.handleReset}
                 className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all"
               >
-                Reset Local Cache
+                Clear & Refresh
               </button>
             </div>
           </div>

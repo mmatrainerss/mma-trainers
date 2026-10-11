@@ -400,8 +400,8 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
-            <span className="inline-block px-3 py-1 bg-[#E63B30]/20 text-[#E63B30] border border-[#E63B30]/40 rounded-full text-xs font-bold uppercase tracking-widest mb-3">
-              Registration Saved to Supabase Database
+            <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full text-xs font-bold uppercase tracking-widest mb-3">
+              Registration Confirmed
             </span>
 
             <h1 className="text-3xl sm:text-4xl font-['Oswald'] font-black uppercase tracking-tight text-white mb-3">
@@ -409,7 +409,7 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
             </h1>
 
             <p className="text-neutral-300 text-sm sm:text-base leading-relaxed max-w-lg mx-auto mb-8">
-              Thank you, <span className="font-semibold text-white">{submissionSuccess.fullName}</span>! Your registration details have been logged in the academy cloud database under reference{' '}
+              Thank you, <span className="font-semibold text-white">{submissionSuccess.fullName}</span>! Your enrollment has been successfully recorded under admission reference{' '}
               <span className="font-mono text-[#E63B30] font-bold">{submissionSuccess.id}</span>.
             </p>
 
@@ -503,7 +503,7 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E63B30]/15 text-[#E63B30] border border-[#E63B30]/30 mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Razorpay Secured • Official Registration Portal</span>
+                <span>Official Student Registration Portal</span>
               </div>
               <h1 className="font-['Oswald'] text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight mb-3">
                 {formConfig.programTitle}
@@ -683,7 +683,7 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                         3
                       </div>
                       <p>
-                        Save your details to sync with our Supabase database and message the coach on WhatsApp.
+                        Submit your registration to confirm your spot and receive batch onboarding info.
                       </p>
                     </div>
                   </div>
@@ -1033,7 +1033,7 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                         className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 active:scale-[0.99] flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                       >
                         <CreditCard className="w-4 h-4" />
-                        <span>Pay ₹{formConfig.amount.toLocaleString('en-IN')} via Razorpay & Save</span>
+                        <span>Pay ₹{formConfig.amount.toLocaleString('en-IN')} via Razorpay</span>
                       </button>
                     ) : (
                       <button
@@ -1044,12 +1044,12 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                         {submitting ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>Saving Details to Database...</span>
+                            <span>Processing Registration...</span>
                           </>
                         ) : (
                           <>
                             <FileCheck className="w-4 h-4" />
-                            <span>Save Registration & Confirm Payment</span>
+                            <span>Confirm Student Registration</span>
                           </>
                         )}
                       </button>

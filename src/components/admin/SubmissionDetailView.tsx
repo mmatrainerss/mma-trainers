@@ -342,7 +342,7 @@ export const SubmissionDetailView: React.FC<SubmissionDetailViewProps> = ({
               </div>
               {notesSaved && (
                 <span className="text-xs text-emerald-400 font-mono flex items-center gap-1 animate-pulse">
-                  <Check className="w-3.5 h-3.5" /> Saved to Supabase
+                  <Check className="w-3.5 h-3.5" /> Notes Saved
                 </span>
               )}
             </div>
@@ -463,9 +463,9 @@ export const SubmissionDetailView: React.FC<SubmissionDetailViewProps> = ({
               <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold">
                 Payment Screenshot / Receipt Proof:
               </span>
-              {submission.screenshotUrl?.includes('supabase.co') && (
+              {submission.screenshotUrl && (
                 <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                  <CheckCircle2 className="w-3 h-3" /> Supabase Storage (proofs)
+                  <CheckCircle2 className="w-3 h-3" /> Receipt Attached
                 </span>
               )}
             </div>

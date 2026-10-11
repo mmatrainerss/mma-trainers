@@ -5,11 +5,6 @@ import {
   Settings,
   Check,
   Save,
-  Database,
-  Copy,
-  ChevronDown,
-  ChevronUp,
-  Radio,
 } from 'lucide-react';
 import { formStorage } from '../../services/formStorage';
 import {
@@ -36,8 +31,6 @@ export const AgencySettingsModal: React.FC<AgencySettingsModalProps> = ({
 
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
-  const [showSql, setShowSql] = useState(false);
-  const [copiedSql, setCopiedSql] = useState(false);
 
   // Load current settings when modal opens
   useEffect(() => {
@@ -52,39 +45,6 @@ export const AgencySettingsModal: React.FC<AgencySettingsModalProps> = ({
       setSaveSuccess(false);
     }
   }, [isOpen]);
-
-  const sqlCode = `-- Run this in your Supabase SQL Editor:
-CREATE TABLE IF NOT EXISTS public.agency_settings (
-  id TEXT PRIMARY KEY DEFAULT 'default',
-  agency_name TEXT DEFAULT 'MMA Trainers Academy',
-  upi_id TEXT DEFAULT '7668598281@ybl',
-  whatsapp_number TEXT DEFAULT '917986851137',
-  razorpay_key_id TEXT DEFAULT 'rzp_test_51Z11122233344',
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
-
-INSERT INTO public.agency_settings (id, agency_name, upi_id, whatsapp_number, razorpay_key_id)
-VALUES ('default', 'MMA Trainers Academy', '7668598281@ybl', '917986851137', 'rzp_test_51Z11122233344')
-ON CONFLICT (id) DO NOTHING;
-
-ALTER TABLE public.agency_settings ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Allow public read agency_settings"
-ON public.agency_settings FOR SELECT
-TO anon, authenticated
-USING (true);
-
-CREATE POLICY "Allow public all agency_settings"
-ON public.agency_settings FOR ALL
-TO anon, authenticated
-USING (true)
-WITH CHECK (true);`;
-
-  const handleCopySql = () => {
-    navigator.clipboard.writeText(sqlCode);
-    setCopiedSql(true);
-    setTimeout(() => setCopiedSql(false), 2000);
-  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +79,7 @@ WITH CHECK (true);`;
       }, 1200);
     } catch (err) {
       console.error('Save error:', err);
-      alert('Saved locally. If Supabase table is not yet created, run the SQL query.');
+      alert('Unable to save settings at this time. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -248,44 +208,6 @@ WITH CHECK (true);`;
                 className="w-full px-3.5 py-2.5 bg-[#0D0D0D] border border-white/15 rounded-xl text-xs text-white font-mono placeholder-neutral-500 focus:outline-none focus:border-[#E63B30] transition-colors"
               />
             </div>
-
-            {/* Cloud Sync Status Strip */}
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 text-neutral-300 text-[11px]">
-                <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                <span>Saves to Supabase Database & Local Cache</span>
-              </span>
-              <button
-                type="button"
-                onClick={() => setShowSql(!showSql)}
-                className="text-[11px] text-amber-400 hover:underline flex items-center gap-0.5 cursor-pointer"
-              >
-                <span>SQL Schema</span>
-                {showSql ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-              </button>
-            </div>
-
-            {/* Collapsible Supabase SQL Schema Box */}
-            {showSql && (
-              <div className="p-3 bg-[#0D0D0D] border border-white/15 rounded-xl text-[10px] font-mono text-neutral-300 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-400 font-bold uppercase text-[9px]">
-                    Supabase SQL Query
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleCopySql}
-                    className="text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer font-sans text-xs"
-                  >
-                    {copiedSql ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedSql ? 'Copied' : 'Copy SQL'}</span>
-                  </button>
-                </div>
-                <pre className="max-h-28 overflow-y-auto bg-black/60 p-2 rounded border border-white/5 text-[9px] text-neutral-400 select-all">
-                  {sqlCode}
-                </pre>
-              </div>
-            )}
 
             {/* Actions */}
             <div className="pt-2 flex items-center gap-2">
