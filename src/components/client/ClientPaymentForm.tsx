@@ -381,21 +381,6 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
             )}
             <RaiLogo theme="dark" />
           </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full text-xs font-medium">
-              <Lock className="w-3 h-3" />
-              <span>Official Academy Portal</span>
-            </div>
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="text-[11px] font-semibold text-neutral-400 hover:text-white px-2.5 py-1 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
-              >
-                Admin Switch
-              </button>
-            )}
-          </div>
         </div>
       </header>
 

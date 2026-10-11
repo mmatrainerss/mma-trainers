@@ -318,16 +318,6 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>Verified UPI Payment</span>
             </div>
-
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="p-1.5 text-neutral-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors text-xs"
-                title="Coach Admin"
-              >
-                <Lock className="w-3.5 h-3.5" />
-              </button>
-            )}
           </div>
         </div>
       </header>
