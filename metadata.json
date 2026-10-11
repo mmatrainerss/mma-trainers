@@ -1,0 +1,6 @@
+{
+  "name": "Rai Martial Arts - Modern Training Center",
+  "description": "Modern martial arts training center for kids and adults in Austin, TX. Brazilian Jiu-Jitsu, Muay Thai, Kickboxing, and MMA for all skill levels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
