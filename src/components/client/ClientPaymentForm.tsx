@@ -486,22 +486,13 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
             </div>
 
             {/* Return Actions */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              {onBackToHome && (
-                <button
-                  type="button"
-                  onClick={onBackToHome}
-                  className="px-6 py-3 bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors"
-                >
-                  Return to Academy Homepage
-                </button>
-              )}
+            <div className="flex justify-center pt-2">
               <button
                 type="button"
-                onClick={() => setSubmissionSuccess(null)}
-                className="px-6 py-3 border border-white/20 hover:border-white/40 text-neutral-300 hover:text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors"
+                onClick={onBackToHome || (() => { window.location.href = '/'; })}
+                className="px-6 py-3 bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
               >
-                Submit Another Form
+                Return to Academy Homepage
               </button>
             </div>
           </motion.div>
