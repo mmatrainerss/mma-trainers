@@ -66,16 +66,16 @@ export const ParallaxBanner: React.FC = () => {
             {[...Array(6)].map((_, i) => (
               <span
                 key={i}
-                className="font-['Oswald'] text-sm sm:text-base font-bold tracking-widest uppercase px-4 inline-flex items-center gap-4 text-white"
+                className="font-mono text-xs sm:text-sm font-semibold tracking-widest uppercase px-6 inline-flex items-center gap-6 text-white"
               >
-                <span>CERTIFIED TRAINERS</span>
-                <span className="text-black/40">★</span>
-                <span>AT-HOME ONLINE TRAINING</span>
-                <span className="text-black/40">★</span>
-                <span>PERSONAL OFFLINE SESSIONS</span>
-                <span className="text-black/40">★</span>
-                <span>CUSTOM NUTRITION</span>
-                <span className="text-black/40">★</span>
+                <span>CERTIFIED COMBAT COACHES</span>
+                <span className="text-white/40">/</span>
+                <span>CHANDIGARH · MOHALI · PANCHKULA</span>
+                <span className="text-white/40">/</span>
+                <span>16 SESSIONS · ALTERNATE DAYS</span>
+                <span className="text-white/40">/</span>
+                <span>6:30 AM – 10:30 PM HOURLY SLOTS</span>
+                <span className="text-white/40">/</span>
               </span>
             ))}
           </motion.div>

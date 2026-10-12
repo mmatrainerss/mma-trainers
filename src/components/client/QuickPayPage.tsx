@@ -172,15 +172,15 @@ export const QuickPayPage: React.FC<QuickPayPageProps> = ({
     const refLine = proofSubmitted ? `• Ref ID: ${proofSubmitted.id}\n` : '';
 
     const text =
-      `Hi Coach! 👋\n` +
+      `Hello Coach,\n` +
       `I have completed the payment of *₹${amountStr}* for *${formConfig.programTitle}*.\n\n` +
       nameLine +
       utrLine +
       refLine +
       (proofSubmitted?.screenshotUrl
-        ? `• Payment Screenshot: Uploaded & attached 📸\n\n`
-        : `• Payment Screenshot: Attached below 📸\n\n`) +
-      `Please verify and confirm my receipt!`;
+        ? `• Payment Screenshot: Uploaded & attached\n\n`
+        : `• Payment Screenshot: Attached below\n\n`) +
+      `Please verify and confirm my receipt.`;
 
     return formatWhatsAppLink(formConfig.whatsappNumber, text);
   };

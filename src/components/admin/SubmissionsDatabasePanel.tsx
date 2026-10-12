@@ -399,7 +399,7 @@ export const SubmissionsDatabasePanel: React.FC = () => {
                       {sub.paymentMethod === 'razorpay' ? (
                         <div className="mt-1">
                           <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
-                            💳 Razorpay: {sub.razorpayPaymentId || 'Paid'}
+                            Razorpay: {sub.razorpayPaymentId || 'Paid'}
                           </span>
                         </div>
                       ) : (
@@ -560,7 +560,7 @@ export const SubmissionsDatabasePanel: React.FC = () => {
           <div className="relative max-w-3xl max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <div className="absolute -top-12 left-0 right-0 flex items-center justify-between text-xs text-white">
               <span className="font-mono text-neutral-400">
-                📷 Payment Receipt
+                Payment Receipt
               </span>
               <div className="flex items-center gap-2">
                 <a

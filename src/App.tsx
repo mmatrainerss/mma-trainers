@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Programs } from './components/Programs';
-import { ParallaxBanner } from './components/ParallaxBanner';
+import { PricingPlans } from './components/PricingPlans';
 import { Coaches } from './components/Coaches';
-import { TargetAudience } from './components/TargetAudience';
 import { TrainingModes } from './components/TrainingModes';
 import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { TrialModal } from './components/TrialModal';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { AdminPanel } from './components/admin/AdminPanel';
 import { ClientPaymentForm } from './components/client/ClientPaymentForm';
 import { QuickPayPage } from './components/client/QuickPayPage';
@@ -39,7 +39,11 @@ const getInitialRoute = (): { view: 'home' | 'admin' | 'client'; formId?: string
 
 export default function App() {
   const [trialModalOpen, setTrialModalOpen] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState<string>('Brazilian Jiu-Jitsu');
+  const [selectedProgram, setSelectedProgram] = useState<string>('Mixed Martial Arts (MMA)');
+  const [selectedPlanId, setSelectedPlanId] = useState<string>('trial');
+  const [selectedAmount, setSelectedAmount] = useState<number>(999);
+  const [selectedLocation, setSelectedLocation] = useState<string>('Chandigarh');
+  const [selectedSlot, setSelectedSlot] = useState<string>('07:00 PM – 08:00 PM (Prime)');
 
   // Synchronous initial route to eliminate black screen flicker
   const initialRoute = getInitialRoute();
@@ -111,16 +115,19 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenTrial = (programName?: string) => {
-    const settings = formStorage.getAgencySettings();
-    const phone = settings.whatsappNumber || '917986851137';
-    const targetProgram = programName || selectedProgram || 'MMA Training';
-    const text =
-      `Hello MMA Trainers! 👋\n\n` +
-      `I would like to book a *Free Trial Session* for *${targetProgram}* at MMA Trainers Academy.\n\n` +
-      `Please let me know the upcoming batch schedule and availability!`;
-
-    window.open(formatWhatsAppLink(phone, text), '_blank');
+  const handleOpenTrial = (
+    programName?: string,
+    planId?: string,
+    amount?: number,
+    location?: string,
+    slot?: string
+  ) => {
+    if (programName) setSelectedProgram(programName);
+    if (planId) setSelectedPlanId(planId);
+    if (amount) setSelectedAmount(amount);
+    if (location) setSelectedLocation(location);
+    if (slot) setSelectedSlot(slot);
+    setTrialModalOpen(true);
   };
 
   const handleCloseTrial = () => {
@@ -142,7 +149,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-[#0D0D0D] text-[#F4F4F5] font-['Plus_Jakarta_Sans'] selection:bg-[#E63B30] selection:text-white flex flex-col">
+      <div className="min-h-screen w-full bg-[#0D0D0D] text-[#F4F4F5] font-['Plus_Jakarta_Sans'] selection:bg-[#E63B30] selection:text-white flex flex-col overflow-x-hidden">
         {/* 1. ADMIN PANEL VIEW */}
         {view === 'admin' && (
           <ErrorBoundary fallbackTitle="Admin Panel">
@@ -178,41 +185,55 @@ export default function App() {
             {/* Dynamic Header */}
             <Navbar onBookTrial={() => handleOpenTrial()} />
 
-            <main className="flex-1">
-              {/* 1. Hero Section & Feature Strip */}
-              <Hero onBookTrial={() => handleOpenTrial()} />
+            <main className="flex-1 w-full overflow-x-hidden">
+              {/* 1. Hero Section (BLACK bg-[#0B0B0B]) */}
+              <Hero
+                onBookTrial={() => handleOpenTrial('Trial Session', 'trial', 999)}
+                onBookMonthly={() => handleOpenTrial('Monthly Package', 'zone-1', 13000)}
+              />
 
-              {/* 2. Programs Section ("Choose Your Program") */}
-              <Programs onSelectProgram={(prog) => handleOpenTrial(prog)} />
+              {/* 2. Disciplines & Programs Section (WHITE bg-white) */}
+              <Programs
+                onBookTrial={(prog) => handleOpenTrial(prog, 'trial', 999)}
+                onBookMonthly={(prog) => {
+                  const isElder = prog.toLowerCase().includes('elder');
+                  handleOpenTrial(prog, isElder ? 'elder' : 'zone-1', isElder ? 15000 : 13000);
+                }}
+              />
 
-              {/* 3. Full-Width Banner & Infinite Marquee */}
-              <ParallaxBanner />
+              {/* 3. Monthly Packages Section (BLACK bg-[#0A0A0A]) */}
+              <PricingPlans onBookTrial={handleOpenTrial} />
 
-              {/* 4. Coaches Section ("Learn From Proven Coaches") */}
+              {/* 4. Coaches & Action Reels Section (WHITE bg-white) */}
               <Coaches />
 
-              {/* Target Audience / Busy Professionals Banner */}
-              <TargetAudience />
-
-              {/* Online vs Offline Training Comparison */}
+              {/* 5. Delivery Modes Section (BLACK bg-[#0A0A0A]) */}
               <TrainingModes />
 
-              {/* FAQ Accordion Grid */}
+              {/* 6. FAQ Accordion Grid (WHITE bg-white) */}
               <FAQ />
             </main>
 
-            {/* Footer */}
+            {/* Footer with Interactive Tricity Area Selector */}
             <Footer
               onOpenAdmin={() => navigate('admin')}
-              onBookTrial={() => handleOpenTrial()}
+              onBookTrial={handleOpenTrial}
+              onBookMonthly={handleOpenTrial}
             />
 
-            {/* Trial Booking Modal (Fallback) */}
+            {/* Course Enrollment & Payment Modal */}
             <TrialModal
               isOpen={trialModalOpen}
               onClose={handleCloseTrial}
               defaultProgram={selectedProgram}
+              defaultPlanId={selectedPlanId}
+              defaultAmount={selectedAmount}
+              defaultLocation={selectedLocation}
+              defaultSlot={selectedSlot}
             />
+
+            {/* Direct WhatsApp Floating Support Button */}
+            <FloatingWhatsApp />
           </>
         )}
       </div>

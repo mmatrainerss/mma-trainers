@@ -19,10 +19,11 @@ export interface ProgramData {
 interface ProgramCardProps {
   prog: ProgramData;
   index: number;
-  onSelect: (title: string) => void;
+  onBookTrial: (title: string) => void;
+  onBookMonthly: (title: string) => void;
 }
 
-export const ProgramCard: React.FC<ProgramCardProps> = ({ prog, index, onSelect }) => {
+export const ProgramCard: React.FC<ProgramCardProps> = ({ prog, index, onBookTrial, onBookMonthly }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -111,7 +112,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ prog, index, onSelect 
       {/* Card Content Grid */}
       <div className="rounded-[26px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[380px]">
         {/* Left Column: Expanding Image */}
-        <div className="lg:col-span-6 relative overflow-hidden bg-neutral-100 min-h-[260px] sm:min-h-[340px] lg:min-h-full">
+        <div className="lg:col-span-6 relative overflow-hidden bg-neutral-100 min-h-[280px] sm:min-h-[360px] lg:min-h-[440px]">
           <motion.img
             style={{ scale: imageScale }}
             src={prog.image}
@@ -122,7 +123,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ prog, index, onSelect 
         </div>
 
         {/* Right Column: Program Details & Description */}
-        <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white relative z-10">
+        <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-between bg-white relative z-10">
           <div>
             {/* Tags */}
             <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -158,37 +159,30 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ prog, index, onSelect 
             </ul>
           </div>
 
-          {/* Bottom Area: Pricing & CTA Button */}
+          {/* Bottom Area: Both Trial and Monthly Booking Options */}
           <div className="pt-5 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            {prog.buttonType === 'full' ? (
-              <>
-                <button
-                  onClick={() => onSelect(prog.title)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#E63B30] hover:bg-[#D32F2F] text-white text-xs font-bold uppercase tracking-wider rounded-xl sm:rounded-full transition-all shadow-md shadow-[#E63B30]/30 hover:shadow-lg active:scale-95 w-fit group/btn"
-                >
-                  <span>BOOK FREE TRIAL CLASS</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button
+                onClick={() => onBookTrial(prog.title)}
+                className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-3 bg-[#E63B30] hover:bg-[#D32F2F] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#E63B30]/25 hover:shadow-lg active:scale-95 cursor-pointer"
+              >
+                <span>Book Trial — ₹999</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
 
-                <div className="font-['Plus_Jakarta_Sans'] font-extrabold text-sm sm:text-base text-neutral-950 sm:text-right">
-                  {prog.price}
-                </div>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => onSelect(prog.title)}
-                  className="w-11 h-11 rounded-xl bg-[#E63B30] hover:bg-[#D32F2F] text-white flex items-center justify-center transition-all shadow-md shadow-[#E63B30]/30 hover:scale-105 active:scale-95 group/btn"
-                  aria-label={`Enroll in ${prog.title}`}
-                >
-                  <ArrowUpRight className="w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </button>
+              <button
+                onClick={() => onBookMonthly(prog.title)}
+                className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-3 bg-neutral-900 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-sm active:scale-95 cursor-pointer"
+              >
+                <span>Book Monthly</span>
+                <ArrowRight className="w-3.5 h-3.5 text-neutral-400" />
+              </button>
+            </div>
 
-                <div className="font-['Plus_Jakarta_Sans'] font-extrabold text-sm sm:text-base text-neutral-950 sm:text-right">
-                  {prog.price}
-                </div>
-              </>
-            )}
+            <div className="font-['Plus_Jakarta_Sans'] font-extrabold text-xs sm:text-sm text-neutral-900 sm:text-right">
+              <span className="text-[#E63B30] block text-[10px] font-mono uppercase tracking-wider font-bold">16 SESSIONS / MONTH</span>
+              {prog.price}
+            </div>
           </div>
         </div>
       </div>

@@ -1,203 +1,168 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Phone, Mail, MapPin, Clock, ArrowUpRight, CheckCircle2, AlertCircle } from 'lucide-react';
-import { MediaPlaceholder } from './MediaPlaceholder';
-import { cleanIndianMobileInput, isValidIndianMobile, formatWhatsAppLink } from '../lib/phoneUtils';
+import { Phone, Mail, MapPin, Clock, ArrowUpRight, CheckCircle2, AlertCircle, MessageCircle } from 'lucide-react';
+import { cleanIndianMobileInput, formatWhatsAppLink } from '../lib/phoneUtils';
 import { formStorage } from '../services/formStorage';
+import { TRICITY_LOCATIONS } from '../data/martialArtsData';
 
 export const Contact: React.FC = () => {
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
-    trainee: 'My Child',
-    program: 'Kids Martial Arts',
-    experience: 'No Experience',
+    location: 'Chandigarh',
+    program: 'Mixed Martial Arts (MMA)',
     message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
+  const settings = formStorage.getAgencySettings();
+  const phone = settings.whatsappNumber || '917986851137';
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
-      setError('Please provide your name, email and phone number.');
+      setError('Please provide your name, email and WhatsApp phone number.');
       return;
     }
     setError('');
     setSubmitted(true);
 
-    const settings = formStorage.getAgencySettings();
-    const phone = settings.whatsappNumber || '917986851137';
     const text =
-      `Hello MMA Trainers! 👋\n\n` +
-      `New Free Trial / Class Inquiry:\n` +
+      `Hello MMA Trainers,\n\n` +
+      `Inquiry via Website Contact Form:\n` +
       `• Name: ${form.name.trim()}\n` +
+      `• Phone: +91 ${form.phone}\n` +
+      `• Location: ${form.location}\n` +
       `• Program: ${form.program}\n` +
-      `• Trainee: ${form.trainee}\n` +
-      `• Experience: ${form.experience}\n` +
-      (form.message.trim() ? `• Note: ${form.message.trim()}\n\n` : '\n') +
-      `Please let me know the upcoming batch schedule!`;
+      (form.message.trim() ? `• Message: ${form.message.trim()}\n\n` : '\n') +
+      `Please let me know training schedule and slot availability.`;
 
     window.open(formatWhatsAppLink(phone, text), '_blank');
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#F4F4F5] relative border-t border-black/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 sm:py-24 bg-[#0B0B0B] text-white relative border-t border-white/5 select-none">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="max-w-2xl mb-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E63B30]/15 text-[#E63B30] border border-[#E63B30]/30 mb-3">
-              CONTACT MMA TRAINERS
-            </div>
-            <h2 className="font-['Oswald'] text-3xl sm:text-5xl font-bold uppercase tracking-tight text-neutral-900 leading-tight">
-              Ready to Start? <br />
-              Contact MMA Trainers
-            </h2>
-          </motion.div>
-
-          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm sm:text-base text-neutral-600 max-w-md leading-relaxed"
+            transition={{ duration: 0.5 }}
           >
-            Call us, visit the training center, or fill out the form and our team will contact you to help you choose the right class.
-          </motion.p>
+            <span className="text-[11px] font-mono tracking-widest uppercase text-[#E63B30] block mb-2 font-bold">
+              GET IN TOUCH
+            </span>
+            <h2 className="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+              Contact & Inquiry
+            </h2>
+            <p className="text-sm text-neutral-400 font-normal">
+              Direct consultation for personalized combat training and doorstep visits across Tricity.
+            </p>
+          </motion.div>
         </div>
 
         {/* 2-Column Split: Info Card & Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Dark Info Card */}
+          {/* Left Column: Info Card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 bg-white border border-black/10 rounded-2xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between shadow-xl"
+            transition={{ duration: 0.4 }}
+            className="lg:col-span-5 bg-[#121212] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6"
           >
-            {/* Facility Photo Placeholder */}
-            <div className="mb-8">
-              <MediaPlaceholder
-                aspectRatio="aspect-[16/9]"
-                className="w-full"
-                badge="AUSTIN TRAINING FACILITY"
-                label="MMA Trainers Academy"
-                sublabel="Downtown Austin, Texas"
-                icon="shield"
-              />
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#E63B30] font-bold block mb-2">
+                TRICITY HEADQUARTERS
+              </span>
+              <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-white mb-1">
+                MMA Trainers Academy
+              </h3>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                Chandigarh · Mohali · Kharar · Zirakpur · Panchkula · New Chandigarh
+              </p>
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-6">
-              {/* Phone */}
+            <div className="space-y-4 pt-2">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">
-                  PHONE
+                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
+                  WHATSAPP DIRECT
                 </span>
                 <a
-                  href="tel:+15125551234"
-                  className="font-['Oswald'] text-lg sm:text-xl font-bold text-white hover:text-[#E63B30] transition-colors"
+                  href={`https://wa.me/${phone}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-mono text-sm font-semibold text-white hover:text-[#25D366] transition-colors inline-flex items-center gap-2"
                 >
-                  +1 (512) 555-1234
+                  <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                  <span>+91 79868 51137</span>
                 </a>
               </div>
 
-              {/* Email */}
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">
-                  EMAIL
+                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
+                  TIMINGS
                 </span>
-                <a
-                  href="mailto:contact@mmatrainers.com"
-                  className="text-sm sm:text-base font-semibold text-neutral-900 hover:text-[#E63B30] transition-colors"
-                >
-                  contact@mmatrainers.com
-                </a>
-              </div>
-
-              {/* Address */}
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">
-                  ADDRESS
-                </span>
-                <p className="text-sm text-neutral-200 font-medium">
-                  000 East 6th Street • Austin, TX 78701 • United States
+                <p className="text-xs text-neutral-300 font-medium">
+                  6:30 AM – 10:30 PM (Continuous Hourly Slots)
                 </p>
-                <a
-                  href="#map-section"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E63B30] hover:text-white mt-2 group"
-                >
-                  <span>GET DIRECTIONS</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
               </div>
 
-              {/* Operating Hours */}
-              <div className="pt-4 border-t border-black/10">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-2">
-                  FACILITY HOURS
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
+                  FORMAT
                 </span>
-                <div className="space-y-1 text-xs text-neutral-700">
-                  <div className="flex justify-between">
-                    <span>Monday–Friday:</span>
-                    <span className="font-semibold text-neutral-900">3:30 PM–9:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Saturday:</span>
-                    <span className="font-semibold text-neutral-900">9:00 AM–2:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday:</span>
-                    <span className="text-neutral-500">Closed</span>
-                  </div>
-                </div>
+                <p className="text-xs text-neutral-300 font-medium">
+                  16 Sessions / Month · Alternate Days · 30m Rest Buffer
+                </p>
               </div>
+            </div>
+
+            {/* Quick Action */}
+            <div className="pt-4 border-t border-white/5">
+              <button
+                type="button"
+                onClick={() => {
+                  const text = 'Hello MMA Trainers, I would like to inquire about training plans.';
+                  window.open(formatWhatsAppLink(phone, text), '_blank');
+                }}
+                className="w-full py-3 px-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                <span>Quick WhatsApp Chat</span>
+              </button>
             </div>
           </motion.div>
 
           {/* Right Column: Clean Form */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 bg-white border border-black/10 rounded-2xl p-6 sm:p-8 shadow-xl"
+            transition={{ duration: 0.4, delay: 0.08 }}
+            className="lg:col-span-7 bg-[#121212] border border-white/10 rounded-2xl p-6 sm:p-8"
           >
             {submitted ? (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-[#E63B30]/20 border border-[#E63B30]/50 text-[#E63B30] flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 className="w-8 h-8" />
+              <div className="text-center py-10">
+                <div className="w-14 h-14 rounded-full bg-[#E63B30]/20 border border-[#E63B30]/40 text-[#E63B30] flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-7 h-7" />
                 </div>
-                <h3 className="text-2xl font-bold uppercase tracking-tight text-neutral-900 mb-2 font-['Oswald']">
-                  Message Received
+                <h3 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
+                  Inquiry Forwarded
                 </h3>
-                <p className="text-neutral-600 text-sm max-w-md mx-auto leading-relaxed mb-6">
-                  Thank you for reaching out, <span className="font-semibold text-neutral-900">{form.name}</span>. A coach from MMA Trainers will contact you at <span className="text-[#E63B30]">{form.email}</span> or <span className="text-[#E63B30]">{form.phone}</span> within 24 hours.
+                <p className="text-neutral-400 text-xs max-w-sm mx-auto leading-relaxed mb-6">
+                  Thank you, <span className="text-white font-medium">{form.name}</span>. Your details have been sent to our coaching desk on WhatsApp.
                 </p>
                 <button
                   type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm({
-                      name: '',
-                      email: '',
-                      phone: '',
-                      trainee: 'My Child',
-                      program: 'Kids Martial Arts',
-                      experience: 'No Experience',
-                      message: ''
-                    });
-                  }}
-                  className="px-6 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
+                  onClick={() => setSubmitted(false)}
+                  className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
                 >
                   Send Another Inquiry
                 </button>
@@ -205,7 +170,7 @@ export const Contact: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <div className="flex items-center gap-2 p-3 rounded-lg bg-red-950/60 border border-red-800 text-red-300 text-xs">
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-300 text-xs">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{error}</span>
                   </div>
@@ -213,7 +178,7 @@ export const Contact: React.FC = () => {
 
                 {/* Full Name */}
                 <div>
-                  <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider mb-1.5">
                     Full Name *
                   </label>
                   <input
@@ -221,15 +186,15 @@ export const Contact: React.FC = () => {
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="John Doe"
-                    className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#E63B30] focus:ring-1 focus:ring-[#E63B30] transition-colors"
+                    placeholder="e.g. Jaspreet Singh"
+                    className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/15 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E63B30] transition-colors"
                   />
                 </div>
 
                 {/* Email & Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider mb-1.5">
                       Email *
                     </label>
                     <input
@@ -237,23 +202,22 @@ export const Contact: React.FC = () => {
                       required
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="email@example.com"
-                      className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#E63B30] focus:ring-1 focus:ring-[#E63B30] transition-colors"
+                      placeholder="e.g. name@example.com"
+                      className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/15 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E63B30] transition-colors"
                     />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider">
-                        WhatsApp / Phone *
+                      <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider">
+                        WhatsApp Mobile *
                       </label>
                       <span className="text-[10px] font-mono text-neutral-400">
                         {form.phone.length}/10
                       </span>
                     </div>
-                    <div className="flex items-center rounded-xl border border-black/10 bg-neutral-50 focus-within:border-[#E63B30] focus-within:ring-1 focus-within:ring-[#E63B30] transition-colors overflow-hidden">
-                      <div className="flex items-center gap-1 px-3 py-3 bg-neutral-200/50 border-r border-black/10 text-xs font-mono font-bold text-neutral-700 select-none shrink-0">
-                        <span>🇮🇳</span>
-                        <span>+91</span>
+                    <div className="flex items-center rounded-xl border border-white/15 bg-neutral-900 focus-within:border-[#E63B30] transition-colors overflow-hidden">
+                      <div className="px-3 py-2.5 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
+                        +91
                       </div>
                       <input
                         type="tel"
@@ -264,95 +228,70 @@ export const Contact: React.FC = () => {
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: cleanIndianMobileInput(e.target.value) })}
                         placeholder="9876543210"
-                        className="flex-1 px-3.5 py-3 bg-transparent text-sm text-neutral-900 font-mono placeholder-neutral-400 focus:outline-none tracking-wider"
+                        className="flex-1 px-3 py-2.5 bg-transparent text-sm text-white font-mono placeholder-neutral-500 focus:outline-none tracking-wider"
                       />
-                      {isValidIndianMobile(form.phone) && (
-                        <div className="pr-3 text-xs font-mono font-bold text-emerald-600">
-                          ✓
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
 
-                {/* Who Will Be Training */}
-                <div>
-                  <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Who Will Be Training?
-                  </label>
-                  <select
-                    value={form.trainee}
-                    onChange={(e) => setForm({ ...form, trainee: e.target.value })}
-                    className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 focus:outline-none focus:border-[#E63B30] transition-colors"
-                  >
-                    <option value="My Child">My Child</option>
-                    <option value="Myself">Myself (Adult)</option>
-                    <option value="Family">Both / Family</option>
-                  </select>
-                  <p className="text-[11px] text-neutral-500 mt-1">
-                    A parent or legal guardian must submit this form for anyone under 18.
-                  </p>
-                </div>
+                {/* Location & Program */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider mb-1.5">
+                      Location *
+                    </label>
+                    <select
+                      value={form.location}
+                      onChange={(e) => setForm({ ...form, location: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/15 rounded-xl text-sm text-white focus:outline-none focus:border-[#E63B30] transition-colors"
+                    >
+                      {TRICITY_LOCATIONS.map((loc) => (
+                        <option key={loc.name} value={loc.name}>
+                          {loc.name} ({loc.tier} · {loc.price})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                {/* Program */}
-                <div>
-                  <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Program
-                  </label>
-                  <select
-                    value={form.program}
-                    onChange={(e) => setForm({ ...form, program: e.target.value })}
-                    className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 focus:outline-none focus:border-[#E63B30] transition-colors"
-                  >
-                    <option value="Kids Martial Arts">Kids Martial Arts</option>
-                    <option value="Brazilian Jiu-Jitsu">Brazilian Jiu-Jitsu (BJJ)</option>
-                    <option value="Muay Thai & Kickboxing">Muay Thai & Kickboxing</option>
-                    <option value="Mixed Martial Arts">Mixed Martial Arts (MMA)</option>
-                    <option value="General Inquiry">General Inquiry / Not Sure</option>
-                  </select>
-                </div>
-
-                {/* Experience Level */}
-                <div>
-                  <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Experience Level
-                  </label>
-                  <select
-                    value={form.experience}
-                    onChange={(e) => setForm({ ...form, experience: e.target.value })}
-                    className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 focus:outline-none focus:border-[#E63B30] transition-colors"
-                  >
-                    <option value="No Experience">No Experience</option>
-                    <option value="Beginner (< 1 Year)">Beginner (&lt; 1 Year)</option>
-                    <option value="Intermediate (1-3 Years)">Intermediate (1–3 Years)</option>
-                    <option value="Advanced (3+ Years)">Advanced (3+ Years)</option>
-                  </select>
+                  <div>
+                    <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider mb-1.5">
+                      Program of Interest *
+                    </label>
+                    <select
+                      value={form.program}
+                      onChange={(e) => setForm({ ...form, program: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/15 rounded-xl text-sm text-white focus:outline-none focus:border-[#E63B30] transition-colors"
+                    >
+                      <option value="Mixed Martial Arts (MMA)">Mixed Martial Arts (MMA)</option>
+                      <option value="Boxing">Boxing</option>
+                      <option value="Kickboxing">Kickboxing</option>
+                      <option value="Practical Self Defence">Practical Self Defence</option>
+                      <option value="Elder Age Fitness Training">Elder Age Fitness Training</option>
+                    </select>
+                  </div>
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label className="block text-xs font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Message
+                  <label className="block text-xs font-medium text-neutral-300 uppercase tracking-wider mb-1.5">
+                    Notes / Query (Optional)
                   </label>
                   <textarea
-                    rows={3}
+                    rows={2}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Tell us about your fitness goals, your schedule availability, or any questions..."
-                    className="w-full px-4 py-3 bg-neutral-50 border border-black/10 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#E63B30] focus:ring-1 focus:ring-[#E63B30] transition-colors resize-none"
+                    placeholder="Any specific goals, preferred timings, or questions..."
+                    className="w-full px-3.5 py-2.5 bg-neutral-900 border border-white/15 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E63B30] transition-colors resize-none"
                   />
                 </div>
-
-                <p className="text-[10px] text-neutral-500 leading-tight">
-                  By submitting this form, you agree to be contacted about classes and acknowledge our Privacy Policy.
-                </p>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#E63B30] hover:bg-[#D32F2F] text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#E63B30]/30 hover:shadow-[#E63B30]/50 active:scale-[0.99]"
+                  className="w-full py-3.5 bg-[#E63B30] hover:bg-[#D32F2F] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-[#E63B30]/25 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  REQUEST A FREE TRIAL
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>Send Inquiry via WhatsApp</span>
                 </button>
               </form>
             )}

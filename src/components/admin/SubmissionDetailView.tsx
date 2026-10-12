@@ -201,10 +201,10 @@ export const SubmissionDetailView: React.FC<SubmissionDetailViewProps> = ({
                   }`}
                 >
                   {submission.status === 'verified'
-                    ? '✓ Verified Student'
+                    ? 'Verified Student'
                     : submission.status === 'rejected'
-                    ? '✕ Rejected'
-                    : '⏳ Pending Verification'}
+                    ? 'Rejected'
+                    : 'Pending Verification'}
                 </span>
                 <span className="text-[11px] font-mono text-neutral-500">
                   Enrolled: {new Date(submission.submittedAt).toLocaleString()}

@@ -48,7 +48,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
       if (currentSubs.length > prevSubCount) {
         const latest = currentSubs[0];
         setToastNotification(
-          `🔔 New Registration: ${latest.fullName} submitted ₹${latest.amount} for "${latest.programTitle}"!`
+          `New Registration: ${latest.fullName} submitted ₹${latest.amount} for "${latest.programTitle}"`
         );
       }
       prevSubCount = currentSubs.length;

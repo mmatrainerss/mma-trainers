@@ -15,7 +15,7 @@ export const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="py-24 bg-white relative border-t border-black/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         {/* Header */}
         <div className="mb-16">
           <motion.div
@@ -24,11 +24,11 @@ export const FAQ: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E63B30]/15 text-[#E63B30] border border-[#E63B30]/30 mb-3">
+            <span className="text-[11px] font-mono tracking-widest uppercase text-[#E63B30] block mb-2 font-bold">
               COMMON QUESTIONS
-            </div>
-            <h2 className="font-['Oswald'] text-3xl sm:text-5xl font-bold uppercase tracking-tight text-neutral-900 leading-tight">
-              Questions Before You Start?
+            </span>
+            <h2 className="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-950 leading-tight">
+              Frequently Asked Questions
             </h2>
           </motion.div>
         </div>
@@ -62,7 +62,7 @@ export const FAQ: React.FC = () => {
                   aria-expanded={isOpen}
                   className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E63B30] cursor-pointer"
                 >
-                  <span className="font-['Oswald'] text-lg sm:text-xl font-bold uppercase tracking-tight text-neutral-900 leading-snug">
+                  <span className="font-['Plus_Jakarta_Sans'] text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                     {faq.question}
                   </span>
                   <div

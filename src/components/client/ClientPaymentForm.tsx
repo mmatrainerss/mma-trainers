@@ -762,9 +762,8 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                           </span>
                         </div>
                         <div className="flex items-center rounded-xl border border-white/15 bg-[#0D0D0D] focus-within:border-[#E63B30] focus-within:ring-1 focus-within:ring-[#E63B30] transition-colors overflow-hidden">
-                          <div className="flex items-center gap-1 px-3 py-3 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
-                            <span>🇮🇳</span>
-                            <span>+91</span>
+                          <div className="px-3 py-3 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
+                            +91
                           </div>
                           <input
                             type="tel"
@@ -777,11 +776,6 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                             placeholder="9876543210"
                             className="flex-1 px-3.5 py-3 bg-transparent text-sm text-white font-mono placeholder-neutral-500 focus:outline-none tracking-wider"
                           />
-                          {isValidIndianMobile(phone) && (
-                            <div className="pr-3 text-xs font-mono font-bold text-emerald-400">
-                              ✓ Valid
-                            </div>
-                          )}
                         </div>
                         <span className="text-[10px] text-neutral-500 mt-1 block">
                           No spaces. Used for WhatsApp confirmation & batch schedule
@@ -862,9 +856,8 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                           </span>
                         </div>
                         <div className="flex items-center rounded-xl border border-white/15 bg-[#0D0D0D] focus-within:border-[#E63B30] focus-within:ring-1 focus-within:ring-[#E63B30] transition-colors overflow-hidden">
-                          <div className="flex items-center gap-1 px-3 py-3 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
-                            <span>🇮🇳</span>
-                            <span>+91</span>
+                          <div className="px-3 py-3 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
+                            +91
                           </div>
                           <input
                             type="tel"
@@ -876,11 +869,6 @@ export const ClientPaymentForm: React.FC<ClientPaymentFormProps> = ({
                             placeholder="9876511223"
                             className="flex-1 px-3.5 py-3 bg-transparent text-sm text-white font-mono placeholder-neutral-500 focus:outline-none tracking-wider"
                           />
-                          {isValidIndianMobile(emergencyContactPhone) && (
-                            <div className="pr-3 text-xs font-mono font-bold text-emerald-400">
-                              ✓ Valid
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>

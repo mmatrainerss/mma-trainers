@@ -170,14 +170,13 @@ export const AgencySettingsModal: React.FC<AgencySettingsModalProps> = ({
                 </label>
                 {isValidIndianMobile(whatsappNumber) && (
                   <span className="text-[10px] font-mono text-emerald-400 font-bold">
-                    ✓ Valid
+                    Valid
                   </span>
                 )}
               </div>
               <div className="flex items-center rounded-xl border border-white/15 bg-[#0D0D0D] focus-within:border-[#E63B30] transition-colors overflow-hidden">
-                <div className="flex items-center gap-1 px-3 py-2.5 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
-                  <span>🇮🇳</span>
-                  <span>+91</span>
+                <div className="px-3 py-2.5 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
+                  +91
                 </div>
                 <input
                   type="tel"

@@ -9,7 +9,7 @@ export interface ProgramItem {
   scheduleFreq: string;
   price: string;
   imageAlt: string;
-  iconType: 'kids' | 'bjj' | 'striking' | 'mma';
+  iconType: 'kids' | 'bjj' | 'striking' | 'mma' | 'boxing' | 'kickboxing' | 'self-defence' | 'elder';
 }
 
 export interface Coach {
@@ -26,7 +26,7 @@ export interface Coach {
 export interface ScheduleSlot {
   time: string;
   name: string;
-  category: 'kids' | 'bjj' | 'striking' | 'mma' | 'open' | 'closed';
+  category: 'kids' | 'bjj' | 'striking' | 'mma' | 'boxing' | 'kickboxing' | 'self-defence' | 'elder' | 'open' | 'closed';
   tag?: string;
   instructor?: string;
   level?: string;

@@ -146,14 +146,14 @@ export const FormGeneratorPanel: React.FC<FormGeneratorPanelProps> = ({ onPrevie
     if (form.formType === 'quick') {
       text =
         `Hello,\n\nHere is your instant UPI QR payment link for *${form.programTitle}* at MMA Trainers Academy:\n\n` +
-        `💰 *Fee:* ₹${Number(form.amount || 0).toLocaleString('en-IN')}\n` +
-        `📲 *Pay & Send Screenshot here:* ${url}\n\n` +
+        `• Fee: ₹${Number(form.amount || 0).toLocaleString('en-IN')}\n` +
+        `• Pay & Send Screenshot here: ${url}\n\n` +
         `_Scan the UPI QR code on the page and tap the WhatsApp button to submit your payment screenshot._`;
     } else {
       text =
         `Hello,\n\nHere is your official registration and payment link for *${form.programTitle}* at MMA Trainers Academy:\n\n` +
-        `💰 *Fee:* ₹${Number(form.amount || 0).toLocaleString('en-IN')}\n` +
-        `📲 *Pay & Register here:* ${url}\n\n` +
+        `• Fee: ₹${Number(form.amount || 0).toLocaleString('en-IN')}\n` +
+        `• Pay & Register here: ${url}\n\n` +
         `_Scan the UPI QR code on the page, send your payment screenshot on WhatsApp, and complete your registration details._`;
     }
 
@@ -371,14 +371,13 @@ export const FormGeneratorPanel: React.FC<FormGeneratorPanelProps> = ({ onPrevie
                 </label>
                 {isValidIndianMobile(whatsappNumber) && (
                   <span className="text-[10px] font-mono text-emerald-400 font-bold">
-                    ✓ Valid
+                    Valid
                   </span>
                 )}
               </div>
               <div className="flex items-center rounded-xl border border-white/15 bg-[#0D0D0D] focus-within:border-[#E63B30] transition-colors overflow-hidden">
-                <div className="flex items-center gap-1 px-3 py-2.5 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
-                  <span>🇮🇳</span>
-                  <span>+91</span>
+                <div className="px-3 py-2.5 bg-white/5 border-r border-white/10 text-xs font-mono font-bold text-neutral-300 select-none shrink-0">
+                  +91
                 </div>
                 <input
                   type="tel"
@@ -482,7 +481,7 @@ export const FormGeneratorPanel: React.FC<FormGeneratorPanelProps> = ({ onPrevie
                   <Check className="w-4 h-4" /> Link Ready
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-neutral-300">
-                  {generatedForm.formType === 'quick' ? '⚡ Quick Pay' : '📝 Full Form'}
+                  {generatedForm.formType === 'quick' ? 'Quick Pay' : 'Full Form'}
                 </span>
               </div>
 
